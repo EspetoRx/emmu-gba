@@ -48,6 +48,17 @@ const body = sources
       patched +=
         "\nfor (const name of ['pack', 'pack8', 'prefix', 'serialize', 'deserialize', 'deserealizeStream']) {\n  Serializer[name] = Serializer.prototype[name];\n}\n";
     }
+    if (name === "js/mmu.js") {
+      // Um DMA com timing NOW e repeat reagenda a si mesmo em serviceDma(),
+      // causando recursão infinita em ROMs que usam esse padrão. No hardware
+      // esse modo não se repete; somente DMAs sincronizados devem voltar à fila.
+      const oldRepeat = "\t\t} else {\n\t\t\tinfo.nextCount = info.count;\n\t\t\tif (info.dstControl == this.DMA_INCREMENT_RELOAD) {\n\t\t\t\tinfo.nextDest = info.dest;\n\t\t\t}\n\t\t\tthis.scheduleDma(number, info);\n\t\t}";
+      const newRepeat = "\t\t} else {\n\t\t\tinfo.nextCount = info.count;\n\t\t\tif (info.dstControl == this.DMA_INCREMENT_RELOAD) {\n\t\t\t\tinfo.nextDest = info.dest;\n\t\t\t}\n\t\t\tif (info.timing !== this.DMA_TIMING_NOW) {\n\t\t\t\tthis.scheduleDma(number, info);\n\t\t\t}\n\t\t}";
+      if (!patched.includes(oldRepeat)) {
+        throw new Error("Patch de DMA não aplicado: js/mmu.js mudou no submodule.");
+      }
+      patched = patched.replace(oldRepeat, newRepeat);
+    }
     return `// --- ${name} ---\n${patched}`;
   })
   .join("\n\n");
