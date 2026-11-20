@@ -2,6 +2,9 @@
 name = "emmu-gba"
 version = "0.1.0"
 edition = "2024"
+description = "Emmu GBA WebAssembly core"
+repository = "https://github.com/EspetoRx/emmu-gba"
+license = "MIT"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
