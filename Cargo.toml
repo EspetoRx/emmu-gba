@@ -1,20 +1,14 @@
-[workspace]
-members = [
-    "crates/emmu-core",
-    "crates/emmu-nes",
-    "crates/emmu-snes",
-    "crates/emmu-frontend",
-    "crates/emmu-mesen-sys",
-    "platforms/desktop",
-    "platforms/web",
-    # "platforms/mobile", (você pode ativar depois)
-]
-# `emmu-super-sabicom` é um submodule usado apenas como dependência normal do
-# `emmu-snes`. Mantê-lo fora do workspace evita que o Cargo (e o rust-analyzer)
-# compile os dev-dependencies dele — em especial `compress-tools`, cujo build
-# script exige a biblioteca nativa `libarchive` (que não é necessária em runtime).
-exclude = ["crates/tetanes-core", "crates/emmu-super-sabicom"]
-resolver = "2"
+[package]
+name = "emmu-gba"
+version = "0.1.0"
+edition = "2024"
 
-[patch.crates-io]
-tetanes-core = { path = "crates/tetanes-core" }
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# O core GBA é JavaScript (Web-GBA-Emulator). No desktop o GBA roda no Mesen,
+# então este crate só tem código quando compilado para wasm32.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"

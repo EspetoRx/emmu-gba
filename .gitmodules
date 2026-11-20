@@ -1,30 +1,3 @@
-[submodule "crates/emmu-core"]
-	path = crates/emmu-core
-	url = https://github.com/EspetoRx/emmu-core.git
-[submodule "crates/emmu-frontend"]
-	path = crates/emmu-frontend
-	url = https://github.com/EspetoRx/emmu-frontend.git
-[submodule "crates/emmu-nes"]
-	path = crates/emmu-nes
-	url = https://github.com/EspetoRx/emmu-nes.git
-[submodule "crates/emmu-snes"]
-	path = crates/emmu-snes
-	url = https://github.com/EspetoRx/emmu-snes.git
-[submodule "crates/tetanes-core"]
-	path = crates/tetanes-core
-	url = https://github.com/EspetoRx/tetanes-core.git
-[submodule "emmu-desktop"]
-	path = platforms/desktop
-	url = https://github.com/EspetoRx/emmu-desktop.git
-[submodule "emmu-web"]
-	path = platforms/web
-	url = https://github.com/EspetoRx/emmu-web.git
-[submodule "crates/emmu-super-sabicom"]
-	path = crates/emmu-super-sabicom
-	url = https://github.com/EspetoRx/emmu-super-sabicom.git
-[submodule "crates/emmu-mesen-sys"]
-	path = crates/emmu-mesen-sys
-	url = https://github.com/EspetoRx/emmu-mesen-sys.git
-[submodule "crates/emmu-gba/vendor/web-gba-emulator"]
-	path = crates/emmu-gba/vendor/web-gba-emulator
+[submodule "vendor/web-gba-emulator"]
+	path = vendor/web-gba-emulator
 	url = https://github.com/alexcerezo/Web-GBA-Emulator.git

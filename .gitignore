@@ -1,19 +1,2 @@
-.DS_Store
-/target
-
-# Node.js dependencies and build output
-node_modules/
-dist/
-
-# Local environment variables
-.env
-.env.*
-!.env.example
-
-# ROMs and saved game data
-*.nes
-*.sfc
-*.smc
-*.rom
-*.sav
-*.state
+/target/
+/js/
